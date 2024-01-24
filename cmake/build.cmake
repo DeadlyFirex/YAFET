@@ -87,16 +87,16 @@ function(verifySubmodules)
 endfunction()
 
 macro(setupOutput)
-    message("Outputting to <${YAFET_OUTPUT_PATH}>")
+    message(STATUS "Outputting to <${YAFET_OUTPUT_PATH}>")
 
     if(TARGET core)
         set_target_properties(core PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${YAFET_OUTPUT_PATH})
         set_target_properties(core PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${YAFET_OUTPUT_PATH})
     endif()
 
-    if(TARGET gui)
-        set_target_properties(gui PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${YAFET_OUTPUT_PATH})
-        set_target_properties(gui PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${YAFET_OUTPUT_PATH})
+    if(TARGET classes)
+        set_target_properties(classes PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${YAFET_OUTPUT_PATH})
+        set_target_properties(classes PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${YAFET_OUTPUT_PATH})
     endif()
 
     if(TARGET app)
