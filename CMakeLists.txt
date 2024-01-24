@@ -14,6 +14,7 @@ project(yafet
 option(YAFET_STRIP_RELEASE "Strip the release builds" ON)
 option(YAFET_IGNORE_BAD_COMPILER "Allow compiling with an unsupported compiler" OFF)
 option(YAFET_VERIFY_SUBMODULES "Verify cloning was with --recursive-submodules" ON)
+option(YAFET_BUILD_LIBRARIES "Manually build project libraries" OFF)
 option(YAFET_STATIC_LINK "Statically link all libraries into the main executable" OFF)
 
 # Compiler settings
