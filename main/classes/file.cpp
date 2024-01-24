@@ -1,4 +1,11 @@
 #include "file.h"
 
-namespace core {
+using namespace core;
+
+FileManager::FileManager() {
+    this->files = std::vector<File>();
+}
+
+File::File(std::string & path) {
+    this->path = path;
 }
