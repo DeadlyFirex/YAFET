@@ -3,6 +3,8 @@ project(core)
 
 # Specify the source files
 target_sources(core PRIVATE
+        include/algorithm.h
+        algorithm.cpp
         include/file.h
         file.cpp
 )
