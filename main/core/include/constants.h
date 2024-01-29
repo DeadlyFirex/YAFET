@@ -5,5 +5,5 @@ namespace core {
                                     " :===::::::::::::::    designed to effectively encrypt data.          \n"
                                     " :==-:::::::::::::.                                                   \n"
                                     " :=-::::::::::::::     This is free software, and you are welcome to  \n"
-                                    " .=-:::::::::::::.     redistribute it under the terms of the AGPLv3  \n";
+                                    " .=-:::::::::::::.     redistribute it under the terms of the GPL-3.0 \n";
 }
