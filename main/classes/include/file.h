@@ -1,13 +1,9 @@
 #include <vector>
 #include <string>
 #include <ctime>
+#include <algorithm.h>
 
 namespace core {
-
-    enum Algorithm {
-        AUTO = 0x00,
-        AES = 0x01
-    };
 
     class File {
     private:
