@@ -1,4 +1,8 @@
+[submodule "lib/CLI11"]
+	path = lib/CLI11
+	url = https://github.com/CLIUtils/CLI11.git
+	branch = main
 [submodule "lib/cryptopp"]
 	path = lib/cryptopp
-	url = https://github.com/weidai11/cryptopp.git
+	url = https://github.com/abdes/cryptopp-cmake.git
 	branch = master
