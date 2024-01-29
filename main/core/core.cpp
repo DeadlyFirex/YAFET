@@ -5,60 +5,79 @@ using namespace CryptoPP;
 
 using namespace core;
 
-bool encryptFile(const std::string& inputFilePath, const std::string& outputFilePath, const std::string& key) {
-    // Read the input file
+std::ifstream getIFileStream(const char * inputFilePath) {
     std::ifstream inputFile(inputFilePath, std::ios::binary);
     if (!inputFile.is_open()) {
-        std::cerr << "Error opening input file: " << inputFilePath << std::endl;
-        return false;
+        throw std::runtime_error("Failure to open input file");
     }
+    return inputFile;
+}
 
-    // Prepare the output file
-    std::ofstream outputFile(outputFilePath, std::ios::binary);
+std::ofstream getOFileStream(const char * inputFilePath) {
+    std::ofstream outputFile(inputFilePath, std::ios::binary);
     if (!outputFile.is_open()) {
-        std::cerr << "Error opening output file: " << outputFilePath << std::endl;
-        return false;
+        throw std::runtime_error("Failure to open output file");
     }
+    return outputFile;
+}
 
-    // Set up AES encryption
+bool encryptFileAes(std::ifstream& inputFile, std::ofstream& outputFile, const std::string& key) {
     CryptoPP::AES::Encryption aesEncryption((CryptoPP::byte*)key.data(), CryptoPP::AES::DEFAULT_KEYLENGTH);
-    CryptoPP::CBC_Mode_ExternalCipher::Encryption cbcEncryption(aesEncryption, (CryptoPP::byte*)key.data());
+    CryptoPP::ECB_Mode_ExternalCipher::Encryption ecbEncryption(aesEncryption, (CryptoPP::byte*)key.data());
 
-    // Use Crypto++ filters for encryption
-    CryptoPP::FileSource fileSource(inputFile, true,
-                                    new CryptoPP::StreamTransformationFilter(cbcEncryption,
-                                                                             new CryptoPP::FileSink(outputFile)
-                                    )
+    CryptoPP::FileSource fileSource(
+            inputFile,true,
+            new CryptoPP::StreamTransformationFilter(
+                    ecbEncryption,
+                    new CryptoPP::FileSink(outputFile)
+            )
     );
 
     return true;
 }
 
-bool decryptFile(const std::string& inputFilePath, const std::string& outputFilePath, const std::string& key) {
-    // Read the input file
-    std::ifstream inputFile(inputFilePath, std::ios::binary);
-    if (!inputFile.is_open()) {
-        std::cerr << "Error opening input file: " << inputFilePath << std::endl;
-        return false;
-    }
+bool decryptFileAes(std::ifstream& inputFile, std::ofstream& outputFile, const std::string& key) {
+    CryptoPP::AES::Decryption aesDecryption((CryptoPP::byte*)key.data(), CryptoPP::AES::DEFAULT_KEYLENGTH);
+    CryptoPP::ECB_Mode_ExternalCipher::Decryption ecbDecryption(aesDecryption, (CryptoPP::byte*)key.data());
 
-    // Prepare the output file
-    std::ofstream outputFile(outputFilePath, std::ios::binary);
-    if (!outputFile.is_open()) {
-        std::cerr << "Error opening output file: " << outputFilePath << std::endl;
-        return false;
-    }
-
-    // Set up AES encryption
-    CryptoPP::AES::Encryption aesEncryption((CryptoPP::byte*)key.data(), CryptoPP::AES::DEFAULT_KEYLENGTH);
-    CryptoPP::CBC_Mode_ExternalCipher::Decryption cbcDecryption(aesEncryption, (CryptoPP::byte*)key.data());
-
-    // Use Crypto++ filters for encryption
-    CryptoPP::FileSource fileSource(inputFile, true,
-                                    new CryptoPP::StreamTransformationFilter(cbcDecryption,
-                                                                             new CryptoPP::FileSink(outputFile)
-                                    )
+    CryptoPP::FileSource fileSource(
+            inputFile, true,
+            new CryptoPP::StreamTransformationFilter(
+                    ecbDecryption,
+                    new CryptoPP::FileSink(outputFile)
+            )
     );
 
     return true;
 }
+
+bool encryptFileBlowfish(std::ifstream& inputFile, std::ofstream& outputFile, const std::string& key) {
+    CryptoPP::Blowfish::Encryption blowfishEncryption((CryptoPP::byte*)key.data(), CryptoPP::Blowfish::DEFAULT_KEYLENGTH);
+    CryptoPP::ECB_Mode_ExternalCipher::Encryption ecbEncryption(blowfishEncryption, (CryptoPP::byte*)key.data());
+
+    CryptoPP::FileSource fileSource(
+            inputFile,true,
+            new CryptoPP::StreamTransformationFilter(
+                    ecbEncryption,
+                    new CryptoPP::FileSink(outputFile)
+            )
+    );
+    return true;
+}
+
+bool decryptFileBlowfish(std::ifstream& inputFile, std::ofstream& outputFile, const std::string& key) {
+    CryptoPP::Blowfish::Decryption blowfishDecryption((CryptoPP::byte*)key.data(), CryptoPP::Blowfish::DEFAULT_KEYLENGTH);
+    CryptoPP::ECB_Mode_ExternalCipher::Decryption ecbDecryption(blowfishDecryption, (CryptoPP::byte*)key.data());
+
+    CryptoPP::FileSource fileSource(
+            inputFile, true,
+            new CryptoPP::StreamTransformationFilter(
+                    ecbDecryption,
+                    new CryptoPP::FileSink(outputFile)
+            )
+    );
+
+    return true;
+}
+
+
