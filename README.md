@@ -3,8 +3,9 @@
 
 ![GitHub release](https://img.shields.io/github/v/release/DeadlyFirex/YAFET)
 ![CMake cross-platform](https://github.com/DeadlyFirex/YAFET/actions/workflows/cmake-multi-platform.yml/badge.svg)
+![CodeQL](https://github.com/DeadlyFirex/YAFET/actions/workflows/codeql.yml/badge.svg)
 [![wakatime](https://wakatime.com/badge/github/DeadlyFirex/YAFET.svg)](https://wakatime.com/badge/github/DeadlyFirex/YAFET)
-![GitHub License](https://img.shields.io/github/license/DeadlyFirex/YAFET)
+![GitHub Licensing](https://img.shields.io/github/license/DeadlyFirex/YAFET)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/DeadlyFirex/YAFET/main)
 ![GitHub repo size](https://img.shields.io/github/repo-size/DeadlyFirex/YAFET)
 
