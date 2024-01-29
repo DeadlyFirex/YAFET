@@ -14,7 +14,7 @@ project(yafet
 option(YAFET_STRIP_RELEASE "Strip the release builds" ON)
 option(YAFET_IGNORE_BAD_COMPILER "Allow compiling with an unsupported compiler" OFF)
 option(YAFET_VERIFY_SUBMODULES "Verify cloning was with --recursive-submodules" ON)
-option(YAFET_BUILD_LIBRARIES "Manually build project libraries" OFF)
+option(YAFET_BUILD_LIBRARIES "Build project libraries from source" ON)
 option(YAFET_STATIC_LINK "Statically link all libraries into the main executable" OFF)
 
 # Compiler settings
@@ -24,11 +24,16 @@ set(CMAKE_INCLUDE_DIRECTORIES_BEFORE ON)
 # Configure the compiler / build
 detectArch()
 verifySubmodules()
-verifyCompiler()
 
 # Detect environment
+setupArguments()
 detectOS()
 generateName()
+
+if (${YAFET_BUILD_LIBRARIES})
+    add_subdirectory(lib/CLI11)
+    add_subdirectory(lib/cryptopp)
+endif()
 
 add_custom_target(yafet_target ALL)
 add_subdirectory(main)
