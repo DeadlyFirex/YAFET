@@ -8,20 +8,13 @@ else()
     add_library(core SHARED)
 endif()
 
-if (NOT ${YAFET_BUILD_LIBRARIES})
-    message(STATUS "Using system libraries")
-    find_library(cryptopp cryptopp REQUIRED)
-
-    # Add the library
-    target_link_libraries(core cryptopp)
-else()
-    message(FATAL_ERROR "Building libraries from source not supported yet")
-endif()
+# Add the library
+target_link_libraries(core PUBLIC cryptopp::cryptopp)
 
 # Specify the source files
 target_sources(core PUBLIC
-        include/core.h
-        core.cpp
+        include/core.h core.cpp
+        include/constants.h constants.cpp
 )
 
 # Specify the required C++ standard
